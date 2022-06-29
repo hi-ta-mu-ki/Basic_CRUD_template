@@ -66,6 +66,7 @@
                 <tr class="table-dark">
                   <th scope="col">ID</th>
                   <th scope="col">お名前</th>
+                  <th scope="col">お電話番号</th>
                   <th scope="col" colspan="3"></th>
                 </tr>
               </thead>
@@ -74,6 +75,7 @@
                 <tr>
                   <th scope="row">{{$item->id}}</td>
                   <td>{{$item->name}}</td>
+                  <td>{{$item->tel}}</td>
                   <td>
                     <a href="/db_sample/b_detail/{{$item->id}}" class="btn btn-success btn-sm">詳細</a>
                   </td>
@@ -97,7 +99,6 @@
   </div>
 
   <!-- page control -->
-  {{-- {!! $items->render() !!}--}}
   {!! $items->appends(['keyword'=>$keyword ?? ''])->render() !!}
 
   @endsection

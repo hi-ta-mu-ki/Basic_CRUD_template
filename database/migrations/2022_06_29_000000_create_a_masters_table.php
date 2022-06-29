@@ -14,8 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('a_masters', function (Blueprint $table) {
-            $table->id();
+            $table->Increments('id');
             $table->string('name');
+            $table->unsignedInteger('price');
             $table->timestamps();
         });
     }

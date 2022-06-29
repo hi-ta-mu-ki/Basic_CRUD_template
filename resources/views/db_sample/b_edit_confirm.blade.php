@@ -8,11 +8,16 @@
 <form action="" method="post" class="form-horizontal">
   @csrf
   <input type="hidden" name="name" value="{{$name}}">
-  <div class="row">
-    <label class="col-sm-2 control-label">お名前</label>
+  <input type="hidden" name="tel" value="{{$tel}}">
+  <div class="form-group row">
+    <label class="col-sm-2 control-label mb-3">お名前</label>
     <div class="col-sm-10">{{$name}}</div>
   </div>
-  <div class="form-group row mt-5">
+  <div class="form-group row">
+    <label class="col-sm-2 control-label mb-3">お電話番号</label>
+    <div class="col-sm-10">{{$tel}}</div>
+  </div>
+  <div class="form-group row">
     <div class="col-sm-12">
       <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">登録</button>
     </div>

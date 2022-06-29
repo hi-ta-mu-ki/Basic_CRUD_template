@@ -55,7 +55,7 @@
               </form>
             </div>
             <div class="col-sm-2 ps-0">
-              <a href="/db_sample/a_new" class="btn btn-warning text-white">
+              <a href="/db_sample/user_new" class="btn btn-warning text-white">
                 新規登録
               </a>
             </div>
@@ -65,8 +65,10 @@
               <thead>
                 <tr class="table-dark">
                   <th scope="col">ID</th>
-                  <th scope="col">品名</th>
-                  <th scope="col">単価</th>
+                  <th scope="col">名前</th>
+                  <th scope="col">メールアドレス</th>
+                  <th scope="col">パスワード</th>
+                  <th scope="col">役割</th>
                   <th scope="col" colspan="3"></th>
                 </tr>
               </thead>
@@ -74,16 +76,27 @@
                 @foreach($items as $item)
                 <tr>
                   <th scope="row">{{$item->id}}</td>
+                  <td>{{$item->email}}</td>
                   <td>{{$item->name}}</td>
-                  <td>{{$item->price}}</td>
                   <td>
-                    <a href="/db_sample/a_detail/{{$item->id}}" class="btn btn-success btn-sm">詳細</a>
+                    @if($item->role < 6)
+                      ********
+                    @else
+                      {{$item->password_raw}}
+                    @endif
+                    </td>
+                  <td>
+                    @if($item->role < 6)
+                      管理者
+                    @else
+                      利用者
+                    @endif
                   </td>
                   <td>
-                    <a href="/db_sample/a_edit/{{$item->id}}" class="btn btn-primary btn-sm">編集</a>
+                    <a href="/db_sample/user_edit/{{$item->id}}" class="btn btn-primary btn-sm">編集</a>
                   </td>
                   <td>
-                    <form action="/db_sample/a_delete/{{$item->id}}" method="POST">
+                    <form action="/db_sample/user_delete/{{$item->id}}" method="POST">
                       @csrf
                       <input type="submit" value="削除" class="btn btn-danger btn-sm btn-dell">
                     </form>
@@ -97,10 +110,8 @@
       </div>
     </div>
   </div>
-
   <!-- page control -->
   {!! $items->appends(['keyword'=>$keyword ?? ''])->render() !!}
-
   @endsection
 
   @section('btn-dell')

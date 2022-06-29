@@ -83,7 +83,6 @@
   </div>
 
   <!-- page control -->
-  {{-- {!! $items->render() !!}--}}
   {!! $items->appends(['keyword'=>$keyword ?? ''])->render() !!}
 
   @endsection
