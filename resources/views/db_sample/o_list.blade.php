@@ -1,7 +1,7 @@
 <!-- 親テンプレート -->
-@extends('layouts.db_sample_admin')
+@extends('layouts.db_sample_member')
 
-@section('title', 'db_sample_admin')
+@section('title', 'db_sample_member')
 
 <!-- 親テンプレートに表示させる場所 -->
 @section('content')
@@ -38,7 +38,7 @@
   <div class="container">
     <div class="row justify-content-left">
       <div class="col-md-12 mt-10 pb-0">
-        <h1 class="font-weight-light mt-4">一覧</h1>
+        <h1 class="font-weight-light mt-4">注文リスト</h1>
         <div class="container mt-5">
           <!-- 検索フォーム -->
           <div class="row pb-30 ms-0 me-15">
@@ -54,39 +54,30 @@
               </div>
               </form>
             </div>
-            <div class="col-sm-2 ps-0">
-              <a href="/db_sample/user_new" class="btn btn-warning text-white">
-                新規登録
-              </a>
-            </div>
           </div>
           <div class="table-responsive">
             <table class="table table-striped table-hover">
               <thead>
                 <tr class="table-dark">
                   <th scope="col">ID</th>
-                  <th scope="col">名前</th>
-                  <th scope="col">メールアドレス</th>
-                  <th scope="col">パスワード</th>
-                  <th scope="col">役割</th>
-                  <th scope="col" colspan="3"></th>
+                  <th scope="col">お名前</th>
+                  <th scope="col">お電話番号</th>
+                  <th scope="col">日付</th>
+                  <th scope="col" colspan="2"></th>
                 </tr>
               </thead>
               <tbody>
                 @foreach($items as $item)
                 <tr>
                   <th scope="row">{{$item->id}}</td>
-                  <td>{{$item->email}}</td>
-                  <td>{{$item->name}}</td>
+                  <td>{{$item->b_masters->name}}</td>
+                  <td>{{$item->b_masters->tel}}</td>
+                  <td>{{$item->created_at}}</td>
                   <td>
-                    @if($item->role < 6) ******** @else {{$item->password_raw}} @endif </td>
-                  <td>
-                    @if($item->role < 6) 管理者 @else 利用者 @endif </td>
-                  <td>
-                    <a href="/db_sample/user_edit/{{$item->id}}" class="btn btn-primary btn-sm">編集</a>
+                    <a href="/db_sample/o_detail/{{$item->id}}" class="btn btn-success btn-sm">明細</a>
                   </td>
                   <td>
-                    <form action="/db_sample/user_delete/{{$item->id}}" method="POST">
+                    <form action="/db_sample/o1_delete/{{$item->id}}" method="POST">
                       @csrf
                       <input type="submit" value="削除" class="btn btn-danger btn-sm btn-dell">
                     </form>
@@ -100,21 +91,8 @@
       </div>
     </div>
   </div>
+
   <!-- page control -->
   {!! $items->appends(['keyword'=>$keyword ?? ''])->render() !!}
-  @endsection
 
-  @section('btn-dell')
-  <script>
-    $(function() {
-      $(".btn-dell").click(function() {
-        if (confirm("本当に削除しますか？")) {
-          //そのままsubmit（削除）
-        } else {
-          //cancel
-          return false;
-        }
-      });
-    });
-  </script>
   @endsection

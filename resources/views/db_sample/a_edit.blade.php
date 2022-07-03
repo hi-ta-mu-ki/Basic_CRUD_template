@@ -9,7 +9,7 @@
   @csrf
   {{ method_field('patch') }}
   <div class="form-group row">
-  <label for="name" class="col-sm-2 col-form-label mb-3">品名</label>
+    <label for="name" class="col-sm-2 col-form-label mb-3">品名</label>
     <div class="col-sm-10">
       <input type="text" name="name" value="{{ $item->name }}" class="form-control @if($errors->has('name')) is-invalid @endif" id="name" required>
       @if($errors->has('name'))
@@ -21,7 +21,7 @@
     </div>
   </div>
   <div class="form-group row">
-  <label for="price" class="col-sm-2 col-form-label mb-3">単価</label>
+    <label for="price" class="col-sm-2 col-form-label mb-3">単価</label>
     <div class="col-sm-10">
       <input type="text" name="price" value="{{ $item->price }}" class="form-control @if($errors->has('price')) is-invalid @endif" id="price" required>
       @if($errors->has('price'))

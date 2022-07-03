@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class A_master extends Model
+class O2_transaction extends Model
 {
   protected $primaryKey = 'id';
   protected $guarded = ['id'];
@@ -29,9 +29,14 @@ class A_master extends Model
     return $query->whereor('name', 'like', '%' . $name . '%')->orderBy('id', 'asc')->paginate(10);
   }
 
-  public function o2_transactions()
+  public function o1_transactions()
   {
-      return $this->hasMany('App\Models\O2_transaction');
+      return $this->belongsTo('App\Models\O1_transaction');
+  }
+
+  public function a_masters()
+  {
+      return $this->belongsTo('App\Models\A_master');
   }
 
 }

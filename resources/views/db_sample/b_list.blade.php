@@ -54,11 +54,6 @@
               </div>
               </form>
             </div>
-            <div class="col-sm-2 ps-0">
-              <a href="/db_sample/b_new" class="btn btn-warning text-white">
-                新規登録
-              </a>
-            </div>
           </div>
           <div class="table-responsive">
             <table class="table table-striped table-hover">

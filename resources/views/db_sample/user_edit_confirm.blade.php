@@ -26,15 +26,12 @@
   <div class="form-group row">
     <label class="col-sm-2 control-label mb-3">役割</label>
     <div class="col-sm-10">
-      @if($role < 6) 管理者
-      @else 利用者
-      @endif
+      @if($role < 6) 管理者 @else 利用者 @endif </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-sm-12">
-      <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">登録</button>
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">登録</button>
+      </div>
     </div>
-  </div>
 </form>
 @endsection

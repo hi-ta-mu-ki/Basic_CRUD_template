@@ -28,4 +28,10 @@ class B_master extends Model
   {
     return $query->whereor('name', 'like', '%' . $name . '%')->orderBy('id', 'asc')->paginate(10);
   }
+
+  public function o1_transactions()
+  {
+      return $this->hasMany('App\Models\O1_transaction');
+  }
+
 }

@@ -9,7 +9,7 @@
   @csrf
   {{ method_field('patch') }}
   <div class="form-group row">
-  <label for="email" class="col-form-label col-sm-2 mb-3">e-mail</label>
+    <label for="email" class="col-form-label col-sm-2 mb-3">e-mail</label>
     <div class="col-sm-10">
       <input type="text" name="email" value="{{ $item->email }}" class="form-control @if($errors->has('email')) is-invalid @endif" id="email" required>
       @if($errors->has('email'))
@@ -21,7 +21,7 @@
     </div>
   </div>
   <div class="form-group row">
-  <label for="name" class="col-form-label col-sm-2 mb-3">名前</label>
+    <label for="name" class="col-form-label col-sm-2 mb-3">名前</label>
     <div class="col-sm-10">
       <input type="text" name="name" value="{{ $item->name }}" class="form-control @if($errors->has('name')) is-invalid @endif" id="name" required>
       @if($errors->has('name'))
@@ -33,7 +33,7 @@
     </div>
   </div>
   <div class="form-group row">
-  <label for="password_raw" class="col-form-label col-sm-2 mb-3">パスワード</label>
+    <label for="password_raw" class="col-form-label col-sm-2 mb-3">パスワード</label>
     <div class="col-sm-10">
       <input type="text" name="password_raw" value="{{ $item->password_raw }}" class="form-control @if($errors->has('password_raw')) is-invalid @endif" id="password_raw" required>
       @if($errors->has('password_raw'))
@@ -45,10 +45,10 @@
     </div>
   </div>
   <div class="form-group mb-3">
-  役割　：　
+    役割　：　
     <div class="form-check form-check-inline">
       <input class="form-check-input" type="radio" name="role" id="inline_radio_1" value="1" @if($item->role < 6) checked @endif>
-      <label class="form-check-label" for="inline_radio_1">管理者</label>
+        <label class="form-check-label" for="inline_radio_1">管理者</label>
     </div>
     <div class="form-check form-check-inline">
       <input class="form-check-input" type="radio" name="role" id="inline_radiox_2" value="10" @if($item->role == 10) checked @endif>
