@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
 </head>
 
-<body>
+<body class="d-flex flex-column">
   <!-- ヘッダー -->
   @include('layouts.parts.header_admin')
   <div class="container">
@@ -32,8 +32,6 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   @yield('btn-dell')
   <!--削除確認処理-->
-  @yield('js-validation')
-  <!--入力チェック処理-->
 </body>
 
 </html>

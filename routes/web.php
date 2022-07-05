@@ -25,9 +25,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::controller(Db_testController::class)->group(function(){
   Route::group(['prefix' => 'db_test'], function () {
-    Route::get('db_test', 'db_test');
-    Route::get('db_test2/{id?}', 'db_test2');
-    Route::get('db_test3/{id?}', 'db_test3');
     Route::get('csv_import', 'csv_import'); //表示
     Route::post('csv_import', 'upload_regist'); //登録
   });
@@ -67,9 +64,9 @@ Route::controller(Db_sampleController::class)->group(function(){
     Route::get('o_new/{id?}', 'o_new'); //入力
     Route::patch('o_new/{id?}', 'o_new_confirm'); //確認
     Route::post('o_new/{id?}', 'o_new_finish'); //完了
-    Route::get('o_edit/{id?}', 'o_edit'); //編集
-    Route::patch('o_edit/{id?}', 'o_edit_confirm'); //確認
-    Route::post('o_edit/{id?}', 'o_edit_finish'); //完了
+    Route::get('o_edit/{id1?}/{id2?}', 'o_edit'); //編集
+    Route::patch('o_edit/{id1?}/{id2?}', 'o_edit_confirm'); //確認
+    Route::post('o_edit/{id1?}/{id2?}', 'o_edit_finish'); //完了
     Route::get('o_detail/{id?}/', 'o_detail'); // 詳細
     Route::post('o1_delete/{id?}/', 'o1_delete'); //削除
     Route::post('o2_delete/{id?}/', 'o2_delete'); //削除

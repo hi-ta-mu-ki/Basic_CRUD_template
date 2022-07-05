@@ -32,14 +32,15 @@
       </div>
     </div>
   </div>
-</div>@endif
+</div>
+@endif
 
 <div id="page-content">
   <div class="container">
     <div class="row justify-content-left">
       <div class="col-md-12 mt-10 pb-0">
-        <h1 class="font-weight-light mt-4">注文リスト</h1>
-        <div class="container mt-5">
+        <h1 class="font-weight-light mt-4">transactionリスト</h1>
+        <div class="container mt-3">
           <!-- 検索フォーム -->
           <div class="row pb-30 ms-0 me-15">
             <div class="col-sm-8 ps-0 mb-2">
@@ -87,12 +88,25 @@
               </tbody>
             </table>
           </div>
+          <!-- page control -->
+          {!! $items->appends(['keyword'=>$keyword ?? ''])->render() !!}
         </div>
       </div>
     </div>
   </div>
+  @endsection
 
-  <!-- page control -->
-  {!! $items->appends(['keyword'=>$keyword ?? ''])->render() !!}
-
+  @section('btn-dell')
+  <script>
+    $(function() {
+      $(".btn-dell").click(function() {
+        if (confirm("本当に削除しますか？")) {
+          // そのままsubmit処理を実行（※削除）
+        } else {
+          // キャンセル
+          return false;
+        }
+      });
+    });
+  </script>
   @endsection

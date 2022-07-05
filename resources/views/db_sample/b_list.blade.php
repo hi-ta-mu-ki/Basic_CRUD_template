@@ -1,7 +1,7 @@
 <!-- 親テンプレート -->
-@extends('layouts.db_sample_admin')
+@extends('layouts.db_sample_member')
 
-@section('title', 'db_sample_admin')
+@section('title', 'db_sample_member')
 
 <!-- 親テンプレートに表示させる場所 -->
 @section('content')
@@ -32,14 +32,15 @@
       </div>
     </div>
   </div>
-</div>@endif
+</div>
+@endif
 
 <div id="page-content">
   <div class="container">
     <div class="row justify-content-left">
       <div class="col-md-12 mt-10 pb-0">
-        <h1 class="font-weight-light mt-4">一覧</h1>
-        <div class="container mt-5">
+        <h1 class="font-weight-light mt-4">B_masterリスト</h1>
+        <div class="container mt-3">
           <!-- 検索フォーム -->
           <div class="row pb-30 ms-0 me-15">
             <div class="col-sm-8 ps-0 mb-2">
@@ -88,14 +89,12 @@
               </tbody>
             </table>
           </div>
+          <!-- page control -->
+          {!! $items->appends(['keyword'=>$keyword ?? ''])->render() !!}
         </div>
       </div>
     </div>
   </div>
-
-  <!-- page control -->
-  {!! $items->appends(['keyword'=>$keyword ?? ''])->render() !!}
-
   @endsection
 
   @section('btn-dell')

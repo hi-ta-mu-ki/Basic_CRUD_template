@@ -215,27 +215,27 @@ class Db_sampleController extends Controller
     return view('db_sample.o_list', ['items' => $items, 'keyword' => $keyword]);
   }
 
-  public function o_edit($id)
+  public function o_edit($id1, $id2)
   {
-    $item1 = O1_transaction::with(['b_masters'])->findOrFail($id);
-    $item2 = O2_transaction::where('o1_transactions_id', $id)->with(['a_masters'])->findOrFail($id);
+    $item1 = O1_transaction::with(['b_masters'])->findOrFail($id1);
+    $item2 = O2_transaction::where('o1_transactions_id', $id1)->with(['a_masters'])->findOrFail($id2);
     $a_items = A_master::All();
     return view('db_sample.o_edit', ['item1' => $item1, 'item2' => $item2, 'a_items' => $a_items]);
   }
 
-  public function o_edit_confirm(\App\Http\Requests\Db_sample_o2_transaction_Request $req)
+  public function o_edit_confirm(\App\Http\Requests\Db_sample_o2_transaction_Request $reqest)
   {
-    $name = A_master::where('id', $req->input('a_masters_id'))->select('name')->first();
-    return view('db_sample.o_edit_confirm', $req->all(), ['name' => $name]);
+    $name = A_master::where('id', $reqest->input('a_masters_id'))->select('name')->first();
+    return view('db_sample.o_edit_confirm', $reqest->all(), ['name' => $name]);
   }
 
-  public function o_edit_finish(Request $request, $id)
+  public function o_edit_finish(Request $request, $id1, $id2)
   {
-    $item = O2_transaction::findOrFail($id);
+    $item = O2_transaction::findOrFail($id2);
     $item->a_masters_id = $request->a_masters_id;
     $item->quantity = $request->quantity;
     $item->save();
-    return redirect('db_sample/o_detail/' . $request->o1_id)->with('flashmessage', '更新が完了いたしました。');
+    return redirect('db_sample/o_detail/' . $id1)->with('flashmessage', '更新が完了いたしました。');
   }
 
   public function o_detail($id)
@@ -284,10 +284,10 @@ class Db_sampleController extends Controller
     return view('db_sample.o_new', ['item1' => $item1, 'a_items' => $a_items]);
   }
 
-  public function o_new_confirm(\App\Http\Requests\Db_sample_o2_transaction_Request $req)
+  public function o_new_confirm(\App\Http\Requests\Db_sample_o2_transaction_Request $reqest)
   {
-    $name = A_master::where('id', $req->input('a_masters_id'))->select('name')->first();
-    return view('db_sample.o_new_confirm', $req->all(), ['name' => $name]);
+    $name = A_master::where('id', $reqest->input('a_masters_id'))->select('name')->first();
+    return view('db_sample.o_new_confirm', $reqest->all(), ['name' => $name]);
   }
 
   public function o_new_finish(Request $request, $id)
@@ -297,7 +297,7 @@ class Db_sampleController extends Controller
     $item->a_masters_id = $request->a_masters_id;
     $item->quantity = $request->quantity;
     $item->save();
-    return redirect('db_sample/o_detail/' . $request->o1_id)->with('flashmessage', '更新が完了いたしました。');
+    return redirect('db_sample/o_detail/' . $request->o1_id)->with('flashmessage', '登録が完了いたしました。');
   }
 
 

@@ -10,8 +10,8 @@
   <div class="container">
     <div class="row justify-content-left">
       <div class="col-md-12 mt-10 pb-0">
-        <h1 class="font-weight-light mt-4">顧客リスト</h1>
-        <div class="container mt-5">
+        <h1 class="font-weight-light mt-4">A_masterリスト</h1>
+        <div class="container mt-3">
           <!-- 検索フォーム -->
           <div class="row pb-30 ms-0 me-15">
             <div class="col-sm-8 ps-0 mb-2">
@@ -28,7 +28,7 @@
             </div>
             <div class="col-sm-2 ps-0">
               <a href="/db_sample/b_new" class="btn btn-warning text-white">
-                新規顧客
+                A_master新規
               </a>
             </div>
           </div>
@@ -49,21 +49,19 @@
                   <td>{{$item->name}}</td>
                   <td>{{$item->tel}}</td>
                   <td>
-                    <a href="/db_sample/o_b_new/{{$item->id}}" class="btn btn-warning  text-white btn-sm">新規注文</a>
+                    <a href="/db_sample/o_b_new/{{$item->id}}" class="btn btn-warning  text-white btn-sm">新規オーダー</a>
                   </td>
                 </tr>
                 @endforeach
               </tbody>
             </table>
           </div>
+          <!-- page control -->
+          {!! $items->appends(['keyword'=>$keyword ?? ''])->render() !!}
         </div>
       </div>
     </div>
   </div>
-
-  <!-- page control -->
-  {!! $items->appends(['keyword'=>$keyword ?? ''])->render() !!}
-
   @endsection
 
   @section('btn-dell')

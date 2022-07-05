@@ -10,28 +10,6 @@ use Goodby\CSV\Import\Standard\LexerConfig;
 
 class Db_testController extends Controller
 {
-  public function db_test()
-  {
-    $items = Test::all();
-    return view('db_test.db_test', ['items' => $items]);
-  }
-
-  public function db_test2($id)
-  {
-    $items = Test::Id2($id)->first();
-    $mes = "あり";
-    if ($items == null) $mes = "なし";
-    return view('db_test.db_test2', ['items' => $items, 'mes' => $mes]);
-  }
-
-  public function db_test3($id)
-  {
-    $items = Test::Id2($id)->get();
-    $mes = "あり";
-    if ($items->count() == 0) $mes = "なし";
-    return view('db_test.db_test', ['items' => $items, 'mes' => $mes]);
-  }
-
   public function csv_import()
   {
     return view('db_test.db_test_csv_import');
