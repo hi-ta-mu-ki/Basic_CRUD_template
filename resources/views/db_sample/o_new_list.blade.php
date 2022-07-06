@@ -10,7 +10,7 @@
   <div class="container">
     <div class="row justify-content-left">
       <div class="col-md-12 mt-10 pb-0">
-        <h1 class="font-weight-light mt-4">A_masterリスト</h1>
+        <h1 class="font-weight-light mt-4">B_masterリスト</h1>
         <div class="container mt-3">
           <!-- 検索フォーム -->
           <div class="row pb-30 ms-0 me-15">
@@ -28,7 +28,7 @@
             </div>
             <div class="col-sm-2 ps-0">
               <a href="/db_sample/b_new" class="btn btn-warning text-white">
-                A_master新規
+                新規B_master
               </a>
             </div>
           </div>
@@ -49,7 +49,7 @@
                   <td>{{$item->name}}</td>
                   <td>{{$item->tel}}</td>
                   <td>
-                    <a href="/db_sample/o_b_new/{{$item->id}}" class="btn btn-warning  text-white btn-sm">新規オーダー</a>
+                    <a href="/db_sample/o_new/{{$item->id}}" class="btn btn-warning  text-white btn-sm">新規transaction</a>
                   </td>
                 </tr>
                 @endforeach

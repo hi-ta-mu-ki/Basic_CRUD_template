@@ -81,9 +81,9 @@
             </table>
           </div>
           <div class="row">
-            <div class="col-sm-2">
-              <a href="/db_sample/o_new/{{$item1->id}}" class="btn btn-warning text-white">
-                新規登録
+            <div class="col-sm-3">
+              <a href="/db_sample/o_new2/{{$item1->id}}" class="btn btn-warning text-white">
+                transaction追加
               </a>
             </div>
             <div class="col-sm-2">

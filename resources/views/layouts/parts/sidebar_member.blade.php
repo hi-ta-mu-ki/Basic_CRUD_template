@@ -1,5 +1,5 @@
 <div class="flex-shrink-0 p-3 bg-white" style="width: 280px;">
-  <a href="/db_sample/o_new_b_list" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+  <a href="/db_sample/o_new_list" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
     <span class="fs-5 fw-semibold">サンプルサイドバー<br />（折り畳み）</span>
   </a>
   <ul class="list-unstyled ps-0">

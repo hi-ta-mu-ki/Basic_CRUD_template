@@ -13,42 +13,76 @@
         <div class="container mt-3">
           <div class="row">
             <label class="col-sm-2 control-label mb-3">お名前</label>
-            <div class="col-sm-10">{{$item1->b_masters->name}}</div>
-          </div>
-          <div class="row">
-            <label class="col-sm-2 control-label mb-3">日付</label>
-            <div class="col-sm-10">{{$item1->created_at}}</div>
+            <div class="col-sm-10">{{$item->b_masters->name}}</div>
           </div>
           <form action="" method="post" class="form-horizontal" novalidate>
             @csrf
             {{ method_field('patch') }}
-            <input type="hidden" name="o1_id" value="{{$item1->id}}">
-            <div class="form-group row">
-              <label for="name" class="col-sm-2 col-form-label mb-3">品名</label>
-              <div class="col-sm-10">
-                <select class="form-select" name="a_masters_id">
-                  @foreach($a_items as $a_item)
-                  <option value="{{$a_item->id}}" @if($a_item->id==old('a_masters_id')) selected @endif>
-                    {{$a_item->name}}
-                  </option>
-                  @endforeach
-                </select>
-              </div>
+            <input type="hidden" name="o1_id" value="{{ $item->id }}">
+            @if ($errors->any())
+            <div class="alert alert-danger">
+            <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+            </ul>
             </div>
-            <div class="form-group row">
-              <label for="quantity" class="col-sm-2 col-form-label mb-3">数量</label>
-              <div class="col-sm-10">
-                <input type="text" name="quantity" value="{{ old('quantity') }}" class="form-control @if($errors->has('quantity')) is-invalid @endif" id="quantity" required>
-                @if($errors->has('quantity'))
-                <div class="invalid-feedback">{{ $errors->first('quantity') }}</div>
+            @endif
+            <table class="table table-borderless" id="dynamicAdd">
+              <thead>
+                <tr class="table-dark">
+                  <th scope="col" style="width:80%">品名</th>
+                  <th scope="col" style="width:10%">数量</th>
+                  <th scope="col" style="width:10%"></th>
+                </tr>
+              </thead>
+              <tbody>
+              @empty(old('o1_id'))
+                <tr>
+                  <td>
+                    <select class="form-select" name="moreFields[0][a_masters_id]">
+                      @foreach($a_items as $a_item)
+                      <option value="{{$a_item->id}}">
+                        {{$a_item->name}}
+                      </option>
+                      @endforeach
+                    </select>
+                  </td>
+                  <td>
+                    <input type="number" name="moreFields[0][quantity]" value="1" class="form-control @if($errors->has('moreFields[0][quantity]')) is-invalid @endif">
+                  </td>
+                </tr>
                 @else
-                <div class="invalid-feedback">必須項目です</div>
-                <!--HTMLバリデーション-->
-                @endif
-              </div>
-            </div>
+                @foreach(old('moreFields') as $key => $value)
+                <tr>
+                  <td>
+                    <select class="form-select" name="moreFields[{{$key}}][a_masters_id]">
+                      @foreach($a_items as $a_item)
+                      <option value="{{$a_item->id}}" @if($a_item->id==old('value.a_masters_id')) selected @endif>
+                        {{$a_item->name}}
+                      </option>
+                      @endforeach
+                    </select>
+                  </td>
+                  <td>
+                    <input type="number" name="moreFields[{{$key}}][quantity]" value="{{old('value.quantity')}}" class="form-control @if($errors->has('value[quantity]')) is-invalid @endif">
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-danger remove-tr">削除</button>
+                  </td>
+                </tr>
+                @endforeach
+                @endempty
+              </tbody>
+            </table>
             <div class="form-group row">
-              <div class="col-sm-12">
+              <div class="col-sm-2">
+                <button type="button" name="add" id="add-btn" class="btn btn-success">追加</button>
+              </div>
+              <div class="col-sm-8 pt-2 text-end">
+                ※数量の欄に正しく入力していることを必ず確認してください。
+              </div>
+              <div class="col-sm-2">
                 <button type="submit" class="btn btn-primary">確認</button>
               </div>
             </div>
@@ -58,4 +92,33 @@
     </div>
   </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+var i = 0;
+$("#add-btn").click(function(){
+++i;
+$("#dynamicAdd").append(
+  '<tr>\
+    <td>\
+      <select class="form-select" name="moreFields['+i+'][a_masters_id]">\
+        @foreach($a_items as $a_item)\
+        <option value="{{$a_item->id}}">\
+          {{$a_item->name}}\
+        </option>\
+        @endforeach\
+      </select>\
+    </td>\
+    <td>\
+      <input type="number" name="moreFields['+i+'][quantity]" value="1" class="form-control">\
+    </td>\
+    <td>\
+      <button type="button" class="btn btn-danger remove-tr">削除</button>\
+    </td>\
+  </tr>'
+  );
+});
+$(document).on('click', '.remove-tr', function(){  
+  $(this).parents('tr').remove();
+});  </script>
 @endsection
