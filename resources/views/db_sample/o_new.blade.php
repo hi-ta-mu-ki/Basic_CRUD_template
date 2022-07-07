@@ -21,11 +21,11 @@
             <input type="hidden" name="o1_id" value="{{ $item->id }}">
             @if ($errors->any())
             <div class="alert alert-danger">
-            <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-            </ul>
+              <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+              </ul>
             </div>
             @endif
             <table class="table table-borderless" id="dynamicAdd">
@@ -37,7 +37,7 @@
                 </tr>
               </thead>
               <tbody>
-              @empty(old('o1_id'))
+                @empty(old('o1_id'))
                 <tr>
                   <td>
                     <select class="form-select" name="moreFields[0][a_masters_id]">
@@ -95,13 +95,13 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-var i = 0;
-$("#add-btn").click(function(){
-++i;
-$("#dynamicAdd").append(
-  '<tr>\
+  var i = 0;
+  $("#add-btn").click(function() {
+    ++i;
+    $("#dynamicAdd").append(
+      '<tr>\
     <td>\
-      <select class="form-select" name="moreFields['+i+'][a_masters_id]">\
+      <select class="form-select" name="moreFields[' + i + '][a_masters_id]">\
         @foreach($a_items as $a_item)\
         <option value="{{$a_item->id}}">\
           {{$a_item->name}}\
@@ -110,15 +110,16 @@ $("#dynamicAdd").append(
       </select>\
     </td>\
     <td>\
-      <input type="number" name="moreFields['+i+'][quantity]" value="1" class="form-control">\
+      <input type="number" name="moreFields[' + i + '][quantity]" value="1" class="form-control">\
     </td>\
     <td>\
       <button type="button" class="btn btn-danger remove-tr">削除</button>\
     </td>\
   </tr>'
-  );
-});
-$(document).on('click', '.remove-tr', function(){  
-  $(this).parents('tr').remove();
-});  </script>
+    );
+  });
+  $(document).on('click', '.remove-tr', function() {
+    $(this).parents('tr').remove();
+  });
+</script>
 @endsection

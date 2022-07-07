@@ -9,6 +9,7 @@ use App\Models\O1_transaction;
 use App\Models\O2_transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class Db_sampleController extends Controller
 {
@@ -370,4 +371,36 @@ class Db_sampleController extends Controller
     return redirect('db_sample/o_detail/' . $request->o1_id)->with('flashmessage', '登録が完了いたしました。');
   }
 
+  //ログイン画面
+  public function login()
+  {
+    if(Auth::check() == false)
+      return view('db_sample.login');
+    else return redirect()->back();
+  }
+  
+  //認証
+  public function login_post(Request $request)
+  {
+    if(Auth::check() == false){
+      $this->validate($request,[
+      'email' => 'email|required',
+      'password' => 'required|min:8'
+      ]);
+      if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
+        if(auth()->user()->role == 1 || auth()->user()->role == 5)
+          return redirect('db_sample/home_admin');
+        else
+          return redirect('db_sample/o_new_list');
+      }
+      else return redirect()->back();
+    }
+    else return redirect('db_sample/login');
+  }
+
+  //ログアウト
+  public function logout(){
+    Auth::logout();
+    return redirect('db_sample/login');
+  }
 }
