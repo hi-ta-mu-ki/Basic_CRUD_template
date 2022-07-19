@@ -17,11 +17,11 @@
             @csrf  
             <div class="row mb-3">
               <label for="login-email" class="col-form-label col-sm-4 text-sm-end">メールアドレス</label>
-              <input type="text" class="col-sm-6" class="form-control" id="login-email" name="email" value="{{ old('email') }}" placeholder="ｅ－Ｍａｉｌ">
+              <input type="text" class="col-sm-6" class="form-control" id="login-email" name="email" value="{{old('email')}}" placeholder="ｅ－Ｍａｉｌ">
             </div>     
             <div class="row mb-3">
               <label for="login-password" class="col-form-label col-sm-4 text-sm-end">パスワード</label>
-              <input type="password" class="col-sm-6" class="form-control" id="login-password" name="password" value="{{ old('password') }}" placeholder="パスワード">
+              <input type="password" class="col-sm-6" class="form-control" id="login-password" name="password" value="{{old('password')}}" placeholder="パスワード">
             </div>
             @if(count($errors) >0)
             <div class="alert alert-danger">

@@ -13,11 +13,10 @@
         <div class="container mt-3">
           <div class="row">
             <label class="col-sm-2 control-label mb-3">お名前</label>
-            <div class="col-sm-10">{{$item->b_masters->name}}</div>
+            <div class="col-sm-10">{{Session::get('b_name')}}</div>
           </div>
           <form action="" method="post" class="form-horizontal">
             @csrf
-            <input type="hidden" name="o1_id" value="{{$item->id}}">
             <table class="table table-borderless">
               <thead>
                 <tr class="table-dark">
@@ -26,12 +25,10 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach($o_items as $o_item)
+                @foreach(Session::get('tmpFields') as $key => $value)
                 <tr>
-                  <td>{{ $o_item['name'] }}</td>
-                  <td>{{ $o_item['quantity'] }}</td>
-                  <input type="hidden" name="o_items_a_masters_id[]" value="{{ $o_item['a_masters_id'] }}">
-                  <input type="hidden" name="o_items_quantity[]" value="{{ $o_item['quantity'] }}">
+                  <td>{{$a_names[$key]['name']}}</td>
+                  <td>{{$value['quantity']}}</td>
                 </tr>
                 @endforeach
               </tbody>

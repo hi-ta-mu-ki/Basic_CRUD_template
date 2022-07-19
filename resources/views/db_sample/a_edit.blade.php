@@ -17,18 +17,18 @@
             <div class="form-group row">
               <label for="name" class="col-sm-2 col-form-label mb-3">品名</label>
               <div class="col-sm-10">
-                <input type="text" name="name" value="{{ $item->name }}" class="form-control @if($errors->has('name')) is-invalid @endif" id="name">
+                <input type="text" name="name" value="{{$item->name}}" class="form-control @if($errors->has('name')) is-invalid @endif" id="name">
                 @if($errors->has('name'))
-                <div class="invalid-feedback">{{ $errors->first('name') }}</div>
+                <div class="invalid-feedback">{{$errors->first('name')}}</div>
                 @endif
               </div>
             </div>
             <div class="form-group row">
               <label for="price" class="col-sm-2 col-form-label mb-3">単価</label>
               <div class="col-sm-10">
-                <input type="text" name="price" value="{{ $item->price }}" class="form-control @if($errors->has('price')) is-invalid @endif" id="price">
+                <input type="text" name="price" value="{{$item->price}}" class="form-control @if($errors->has('price')) is-invalid @endif" id="price">
                 @if($errors->has('price'))
-                <div class="invalid-feedback">{{ $errors->first('price') }}</div>
+                <div class="invalid-feedback">{{$errors->first('price')}}</div>
                 @endif
               </div>
             </div>

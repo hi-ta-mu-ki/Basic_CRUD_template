@@ -10,6 +10,7 @@ use App\Models\O2_transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class Db_sampleController extends Controller
 {
@@ -97,7 +98,8 @@ class Db_sampleController extends Controller
     if (empty($keyword))
       $items = B_master::orderBy('id', 'asc')->paginate(10);
     else
-      $items = B_master::where('name', 'like', '%' . $keyword . '%')->orderBy('id', 'asc')->paginate(10);
+      $items = B_master::where('name', 'like', '%' . $keyword . '%')->orwhere('tel', 'like', '%' . $keyword . '%')
+      ->orderBy('id', 'asc')->paginate(10);
     return view('db_sample.b_list',['items' => $items, 'keyword' => $keyword]);
   }
 
@@ -121,7 +123,7 @@ class Db_sampleController extends Controller
     $item->tel = $request->tel;
     $item->save();
     $b_masters = B_master::latest()->first();
-    return redirect('/db_sample/o_b_new2/' . $b_masters->id)->with('flashmessage', '登録が完了いたしました。');
+    return redirect('/db_sample/o_new/' . $b_masters->id)->with('flashmessage', '登録が完了いたしました。');
   }
 
 //B_master編集
@@ -241,45 +243,58 @@ class Db_sampleController extends Controller
     if (empty($keyword))
       $items = B_master::orderBy('id', 'asc')->paginate(10);
     else
-      $items = B_master::where('tel', 'like', '%' . $keyword . '%')->orderBy('id', 'asc')->paginate(10);
+    $items = B_master::where('name', 'like', '%' . $keyword . '%')->orwhere('tel', 'like', '%' . $keyword . '%')
+    ->orderBy('id', 'asc')->paginate(10);
     return view('db_sample.o_new_list', ['items' => $items, 'keyword' => $keyword]);
   }
 
 //o2_transaction新規入力
   public function o_new($id)
   {
-    $item = New O1_transaction();
-    $item->b_masters_id = $id;
-    $item->save();
-    $item = O1_transaction::latest()->with(['b_masters'])->first();
+    if (Session::has('b_id')){
+    }
+    else{
+      Session::put('b_id', $id);
+      $item = B_master::findOrFail($id);
+      Session::put('b_name', $item->name);
+    }
     $a_items = A_master::All();
-    return view('db_sample.o_new', ['item' => $item, 'a_items' => $a_items]);
+  return view('db_sample.o_new', ['a_items' => $a_items]);
   }
 
 //o2_transaction新規確認
-  public function o_new_confirm(\App\Http\Requests\Db_sample_o_transaction_Request $request)
+  public function o_new_confirm(Request $request)
   {
-    $item = O1_transaction::where('id', '=', $request->o1_id)->with(['b_masters'])->first();
-    $o_items = array(array());
-    foreach ($request->moreFields as $key => $value) {
-      $o_items[$key]['a_masters_id'] = $value['a_masters_id'];
+    Session::put('tmpFields', $request->moreFields);
+    $request->validate(['moreFields.*.quantity' => 'required|numeric|integer'],
+      ["required" => "数量が入力されていない商品があります。",
+      "numeric" => "数量は数値項目です。",
+      "integer" => "数量は整数数量は項目です。"]);
+    $a_names = array();
+    foreach (Session::get('tmpFields') as $key => $value) {
       $name = A_master::where('id', '=', $value['a_masters_id'])->select('name')->first();
-      $o_items[$key]['name'] = $name->name;
-      $o_items[$key]['quantity'] = $value['quantity'];
+      $a_names[$key]['name'] = $name->name;
     }
-    return view('db_sample.o_new_confirm', ['item' => $item, 'o_items' => $o_items]);
+    return view('db_sample.o_new_confirm', ['a_names' => $a_names]);
   }
 
 //o2_transaction新規完了
-  public function o_new_finish(Request $request)
+  public function o_new_finish()
   {
-    foreach ($request->o_items_a_masters_id as $key => $value) {
+    $item = New O1_transaction();
+    $item->b_masters_id = Session::get('b_id');
+    $item->save();
+    $o1_item = O1_transaction::latest()->with(['b_masters'])->first();
+    foreach (Session::get('tmpFields') as $value) {
       $item = New O2_transaction();
-      $item->o1_transactions_id = $request->o1_id;
-      $item->a_masters_id = $value;
-      $item->quantity = $request->o_items_quantity[$key];
+      $item->o1_transactions_id = $o1_item->id;
+      $item->a_masters_id = $value['a_masters_id'];
+      $item->quantity = $value['quantity'];
       $item->save();
     }
+    Session::forget('b_id');
+    Session::forget('b_name');
+    Session::forget('tmpFields');
     return redirect('db_sample/o_new_list/')->with('flashmessage', '登録が完了いたしました。');
   }
 
@@ -291,7 +306,8 @@ class Db_sampleController extends Controller
       $items = O1_transaction::with(['b_masters'])->orderBy('id', 'desc')->paginate(10);
     else
       $items = O1_transaction::join('b_masters', 'o1_transactions.b_masters_id', '=', 'b_masters.id')
-        ->where('tel', 'like', '%' . $keyword . '%')->orderBy('o1_transactions.id', 'desc')->paginate(10);
+        ->where('name', 'like', '%' . $keyword . '%')->orwhere('tel', 'like', '%' . $keyword . '%')
+        ->orderBy('o1_transactions.id', 'desc')->paginate(10);
     return view('db_sample.o_list', ['items' => $items, 'keyword' => $keyword]);
   }
 
@@ -401,6 +417,7 @@ class Db_sampleController extends Controller
   //ログアウト
   public function logout(){
     Auth::logout();
+    Session::flush();
     return redirect('db_sample/login');
   }
 }

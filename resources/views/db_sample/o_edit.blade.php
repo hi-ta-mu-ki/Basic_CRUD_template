@@ -38,9 +38,9 @@
             <div class="form-group row">
               <label for="quantity" class="col-sm-2 col-form-label mb-3">数量</label>
               <div class="col-sm-10">
-                <input type="text" name="quantity" value="{{ $item2->quantity }}" class="form-control @if($errors->has('quantity')) is-invalid @endif" id="quantity">
+                <input type="number" name="quantity" value="{{$item2->quantity}}" class="form-control @if($errors->has('quantity')) is-invalid @endif" id="quantity">
                 @if($errors->has('quantity'))
-                <div class="invalid-feedback">{{ $errors->first('quantity') }}</div>
+                <div class="invalid-feedback">{{$errors->first('quantity')}}</div>
                 @endif
               </div>
             </div>

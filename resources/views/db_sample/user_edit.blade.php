@@ -17,9 +17,9 @@
             <div class="form-group row">
               <label for="email" class="col-form-label col-sm-2 mb-3">e-mail</label>
               <div class="col-sm-10">
-                <input type="text" name="email" value="{{ $item->email }}" class="form-control @if($errors->has('email')) is-invalid @endif" id="email">
+                <input type="text" name="email" value="{{$item->email}}" class="form-control @if($errors->has('email')) is-invalid @endif" id="email">
                 @if($errors->has('email'))
-                <div class="invalid-feedback">{{ $errors->first('email') }}</div>
+                <div class="invalid-feedback">{{$errors->first('email')}}</div>
                 @endif
               </div>
             </div>
@@ -28,16 +28,16 @@
               <div class="col-sm-10">
                 <input type="text" name="name" value="{{ $item->name }}" class="form-control @if($errors->has('name')) is-invalid @endif" id="name">
                 @if($errors->has('name'))
-                <div class="invalid-feedback">{{ $errors->first('name') }}</div>
+                <div class="invalid-feedback">{{$errors->first('name')}}</div>
                 @endif
               </div>
             </div>
             <div class="form-group row">
               <label for="password_raw" class="col-form-label col-sm-2 mb-3">パスワード</label>
               <div class="col-sm-10">
-                <input type="text" name="password_raw" value="{{ $item->password_raw }}" class="form-control @if($errors->has('password_raw')) is-invalid @endif" id="password_raw">
+                <input type="text" name="password_raw" value="{{$item->password_raw}}" class="form-control @if($errors->has('password_raw')) is-invalid @endif" id="password_raw">
                 @if($errors->has('password_raw'))
-                <div class="invalid-feedback">{{ $errors->first('password_raw') }}</div>
+                <div class="invalid-feedback">{{$errors->first('password_raw')}}</div>
                 @endif
               </div>
             </div>

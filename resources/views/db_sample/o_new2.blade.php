@@ -9,7 +9,7 @@
   <div class="container">
     <div class="row justify-content-left">
       <div class="col-md-12">
-        <h1 class="font-weight-light mt-4">transaction新規</h1>
+        <h1 class="font-weight-light mt-4">transaction新規追加</h1>
         <div class="container mt-3">
           <div class="row">
             <label class="col-sm-2 control-label mb-3">お名前</label>
@@ -38,9 +38,9 @@
             <div class="form-group row">
               <label for="quantity" class="col-sm-2 col-form-label mb-3">数量</label>
               <div class="col-sm-10">
-                <input type="text" name="quantity" value="{{ old('quantity') }}" class="form-control @if($errors->has('quantity')) is-invalid @endif" id="quantity">
+                <input type="number" name="quantity" value="{{old('quantity')}}" class="form-control @if($errors->has('quantity')) is-invalid @endif" id="quantity">
                 @if($errors->has('quantity'))
-                <div class="invalid-feedback">{{ $errors->first('quantity') }}</div>
+                <div class="invalid-feedback">{{$errors->first('quantity')}}</div>
                 @endif
               </div>
             </div>

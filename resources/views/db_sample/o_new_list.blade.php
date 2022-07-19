@@ -17,7 +17,7 @@
             <div class="col-sm-8 ps-0 mb-2">
               <form method="get" action="" class="form-inline">
                 <div class="form-group">
-                  <input type="text" name="keyword" class="form-control" value="{{$keyword ?? ''}}" placeholder="検索キーワード">
+                  <input type="text" name="keyword" class="form-control" value="{{$keyword ?? ''}}" placeholder="名前または電話番号で検索">
                 </div>
             </div>
             <div class="col-sm-2 ps-0">

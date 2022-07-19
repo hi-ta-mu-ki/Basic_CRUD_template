@@ -9,7 +9,7 @@
   <div class="container">
     <div class="row justify-content-left">
       <div class="col-md-12">
-        <h1 class="font-weight-light mt-4">transaction新規確認</h1>
+        <h1 class="font-weight-light mt-4">transaction新規追加確認</h1>
         <div class="container mt-3">
           <form action="" method="post" class="form-horizontal">
             @csrf
