@@ -43,11 +43,19 @@
         <div class="container mt-3">
           <div class="row">
             <label class="col-sm-2 control-label mb-3">お名前</label>
-            <div class="col-sm-10">{{$item1->b_masters->name}}</div>
+            <div class="col-sm-5">{{$item1->b_masters->name}}</div>
+            <label class="col-sm-1 control-label mb-3">日付</label>
+            <div class="col-sm-4">{{$item1->created_at}}</div>
           </div>
-          <div class="row">
-            <label class="col-sm-2 control-label mb-3">日付</label>
-            <div class="col-sm-10">{{$item1->created_at}}</div>
+          <div class="row mb-3">
+            <div class="col-sm-3">
+              <a href="/db_sample/o_new2/{{$item1->id}}" class="btn btn-warning text-white">
+                transaction追加
+              </a>
+            </div>
+            <div class="col-sm-2">
+              <a href="/db_sample/o_list"><button type="submit" class="btn btn-primary">戻る</button></a>
+            </div>
           </div>
           <div class="table-responsive">
             <table class="table table-striped table-hover">
@@ -79,16 +87,6 @@
                 @endforeach
               </tbody>
             </table>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <a href="/db_sample/o_new2/{{$item1->id}}" class="btn btn-warning text-white">
-                transaction追加
-              </a>
-            </div>
-            <div class="col-sm-2">
-              <a href="/db_sample/o_list"><button type="submit" class="btn btn-primary">戻る</button></a>
-            </div>
           </div>
         </div>
       </div>

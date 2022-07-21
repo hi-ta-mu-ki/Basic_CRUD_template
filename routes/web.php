@@ -76,6 +76,8 @@ Route::controller(Db_sampleController::class)->group(function(){
       Route::get('o_new2/{id?}', 'o_new2'); //o2_transaction新規追加入力
       Route::patch('o_new2/{id?}', 'o_new2_confirm'); //o2_transaction新規追加確認
       Route::post('o_new2/{id?}', 'o_new2_finish'); //o2_transaction新規追加完了
+      Route::get('o_print/{id?}/', 'o_print'); //o1_o2_transaction帳票
+      Route::get('o_pdf/{id?}/', 'o_pdf'); //o1_o2_transaction帳票(PDF)
     });
     Route::post('login', 'login_post'); //認証
     Route::get('logout', 'logout'); //認証

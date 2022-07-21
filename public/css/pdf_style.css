@@ -1,0 +1,91 @@
+@font-face {
+  font-family: ipag;
+  font-style: normal;
+  font-weight: normal;
+  src: url("{{ storage_path('fonts/ipag.ttf') }}") format('truetype');
+}
+
+@font-face {
+  font-family: ipag;
+  font-style: bold;
+  font-weight: bold;
+  src: url("{{ storage_path('fonts/ipag.ttf') }}") format('truetype');
+}
+
+body {
+  font-family: ipag !important;
+  line-height: 1.0em;
+}
+
+.page {
+  padding: 10mm 10mm;
+}
+
+.text_right {
+  text-align: right;
+}
+
+.text_center {
+  text-align: center;
+}
+
+.text_underline {
+  text-decoration: underline;
+}
+
+.name {
+  font-size: 12pt;
+}
+
+.caption {
+  font-size: 9pt;
+}
+
+.bank {
+  margin-bottom: 1em;
+}
+
+h1 {
+  margin: 1em 0;
+  font-size: 16pt;
+  letter-spacing: 0.2em;
+}
+
+table.price {
+  width: 60%;
+  border-collapse: collapse;
+}
+
+th.price {
+  border: solid 0.5pt #000;
+  padding: 1em;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+tbody tr:nth-child(odd) {
+  background-color:#fff;
+}
+
+tbody tr:nth-child(even) {
+  background-color:#c4ebff;
+}
+
+th,
+td {
+  border: solid 0.0pt #000;
+  padding: 0.1em;
+}
+
+thead,
+tfoot th {
+  background: #68cdff;
+  color:#fff;
+}
+
+tfoot td:empty {
+  border: none;
+}

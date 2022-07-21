@@ -1,0 +1,144 @@
+/* A4縦用のベース設定 */
+@page {
+  size: A4 portrait;
+  /* 横の場合はlandscape */
+  margin: 0mm;
+}
+
+/* 各要素の余白リセット */
+* {
+  margin: 0mm;
+  padding: 0mm;
+}
+
+/* 印刷時の調子を整える */
+body {
+  width: 210mm;
+  /* 用紙の横幅を改めて指定 Chrome用 */
+  /* -webkit-print-color-adjust: exact;
+  color-adjust: exact; */
+  line-height: 1.2em;
+}
+
+/* 印刷1ページ用のコンテンツはここで定義 */
+.page {
+  width: 210mm;
+  /* 用紙の横幅を改めて指定 */
+  height: 296.5mm;
+  /* 高さには0.5mm余裕をもたせる */
+  page-break-after: always;
+
+  box-sizing: border-box;
+  padding: 20mm 25mm;
+  /* 用紙の余白 */
+  font-size: 11pt;
+}
+
+/* プレビュー用のスタイル */
+@media screen {
+  body {
+    background: #eee;
+  }
+
+  .page {
+    background: white;
+    /* 背景を白く */
+    box-shadow: 0 .5mm 2mm rgba(0, 0, 0, .3);
+    /* ドロップシャドウ */
+    margin: 5mm;
+  }
+
+}
+
+/* 印刷ボタンのスタイル */
+.btn{
+  border: 1px solid #00f;
+  border-radius: 5px;
+  background-color: #00f;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  font-weight: 700;
+  color: white;
+  width: 100px;
+}
+
+@media print {
+  .print_button {
+    display: none;
+  }
+}
+
+
+.text_right {
+  text-align: right;
+}
+
+.text_center {
+  text-align: center;
+}
+
+.text_underline {
+  text-decoration: underline;
+}
+
+.name {
+  font-size: 12pt;
+}
+
+.caption {
+  font-size: 9pt;
+}
+
+.bank {
+  margin-bottom: 1em;
+}
+
+p.mgn {
+  margin: 1em;
+}
+
+h1 {
+  margin: 1em 0;
+  font-size: 16pt;
+  letter-spacing: 0.2em;
+}
+
+table.price {
+  width: 60%;
+  border-collapse: collapse;
+}
+
+th.price {
+  border: solid 0.5pt #000;
+  padding: 1em;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+tbody tr:nth-child(odd) {
+  background-color:#fff;
+}
+
+tbody tr:nth-child(even) {
+  background-color:#c4ebff;
+}
+
+th,
+td {
+  border: solid 0pt #000;
+  padding: 0.1em;
+}
+
+thead,
+tfoot th {
+  background: #68cdff;
+  color:#fff;
+}
+
+tfoot td:empty {
+  border: none;
+}
