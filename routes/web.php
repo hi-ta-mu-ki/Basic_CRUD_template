@@ -2,7 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Db_testController;
-use App\Http\Controllers\Db_sampleController;
+use App\Http\Controllers\Db_sample_a_master_Controller;
+use App\Http\Controllers\Db_sample_b_master_Controller;
+use App\Http\Controllers\Db_sample_transaction_Controller;
+use App\Http\Controllers\Db_sample_user_Controller;
+use App\Http\Controllers\Db_sample_login_Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,10 +34,12 @@ Route::controller(Db_testController::class)->group(function(){
   });
 });
 
-Route::controller(Db_sampleController::class)->group(function(){
-  Route::group(['prefix' => 'db_sample'], function () {
-    Route::group(['middleware' => 'auth_admin'], function(){ //admin権限
+Route::group(['prefix' => 'db_sample'], function () {
+  Route::group(['middleware' => 'auth_admin'], function(){ //admin権限
+    Route::controller(Db_sample_login_Controller::class)->group(function(){
       Route::get('home_admin', 'home_admin'); //adminホーム
+    });
+    Route::controller(Db_sample_a_master_Controller::class)->group(function(){
       Route::get('a_list', 'a_list'); //A_masterリスト
       Route::get('a_new', 'a_new'); //A_master新規入力
       Route::patch('a_new', 'a_new_confirm'); //A_master新規確認
@@ -43,6 +49,8 @@ Route::controller(Db_sampleController::class)->group(function(){
       Route::post('a_edit/{id?}', 'a_edit_finish'); //A_master編集完了
       Route::get('a_detail/{id?}/', 'a_detail'); //A_master詳細
       Route::post('a_delete/{id?}/', 'a_delete'); //A_master削除
+    });
+    Route::controller(Db_sample_user_Controller::class)->group(function(){
       Route::get('user_list', 'user_list'); //ユーザリスト
       Route::get('user_new', 'user_new'); //ユーザ新規入力
       Route::patch('user_new', 'user_new_confirm'); //ユーザ新規確認
@@ -52,7 +60,9 @@ Route::controller(Db_sampleController::class)->group(function(){
       Route::post('user_edit/{id?}', 'user_edit_finish'); //ユーザ編集完了
       Route::post('user_delete/{id?}/', 'user_delete'); //ユーザ削除
     });
-    Route::group(['middleware' => 'auth_member'], function(){ //member権限
+  });
+  Route::group(['middleware' => 'auth_member'], function(){ //member権限
+    Route::controller(Db_sample_b_master_Controller::class)->group(function(){
       Route::get('b_list', 'b_list'); //B_masterリスト
       Route::get('b_new', 'b_new'); //B_master新規入力
       Route::patch('b_new', 'b_new_confirm'); //B_master新規確認
@@ -62,6 +72,8 @@ Route::controller(Db_sampleController::class)->group(function(){
       Route::post('b_edit/{id?}', 'b_edit_finish'); //B_master編集完了
       Route::get('b_detail/{id?}/', 'b_detail'); //B_master詳細
       Route::post('b_delete/{id?}/', 'b_delete'); //B_master削除
+    });
+    Route::controller(Db_sample_transaction_Controller::class)->group(function(){
       Route::get('o_new_list', 'o_new_list'); //o1_transaction入力用B_masterリスト
       Route::get('o_new/{id?}', 'o_new'); //o2_transaction新規入力
       Route::patch('o_new/{id?}', 'o_new_confirm'); //o2_transaction新規確認
@@ -79,13 +91,14 @@ Route::controller(Db_sampleController::class)->group(function(){
       Route::get('o_print/{id?}/', 'o_print'); //o1_o2_transaction帳票
       Route::get('o_pdf/{id?}/', 'o_pdf'); //o1_o2_transaction帳票(PDF)
     });
+  });
+});
+
+Route::controller(Db_sample_login_Controller::class)->group(function(){
+  Route::group(['prefix' => 'db_sample'], function () {
     Route::post('login', 'login_post'); //認証
     Route::get('logout', 'logout'); //認証
   });
 });
-// ログイン
-// Route::get('db_sample/login', function () {
-//   return view('db_sample.login');
-// });
 
-Route::get('db_sample/login', [Db_sampleController::class, 'login']);
+Route::get('db_sample/login', [Db_sample_login_Controller::class, 'login']);
