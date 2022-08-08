@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class Db_sample_user_Controller extends Controller
 {
-  private User_ServiceInterface $sample_service;
+  private User_ServiceInterface $user_service;
 
   public function __construct(User_ServiceInterface $user_service)
   {

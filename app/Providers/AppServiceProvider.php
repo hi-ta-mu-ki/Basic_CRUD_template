@@ -22,6 +22,22 @@ class AppServiceProvider extends ServiceProvider
         \App\Services\User_ServiceInterface::class,
         \App\Services\User_Service::class,
       );
+      $this->app->bind(
+        \App\Repositories\A_master_RepositoryInterface::class,
+        \App\Repositories\A_master_Repository::class,
+      );
+      $this->app->bind(
+        \App\Services\A_master_ServiceInterface::class,
+        \App\Services\A_master_Service::class,
+      );
+      $this->app->bind(
+        \App\Repositories\B_master_RepositoryInterface::class,
+        \App\Repositories\B_master_Repository::class,
+      );
+      $this->app->bind(
+        \App\Services\B_master_ServiceInterface::class,
+        \App\Services\B_master_Service::class,
+      );
     }
 
     /**
