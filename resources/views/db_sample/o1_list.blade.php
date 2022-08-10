@@ -75,7 +75,7 @@
                   <td>{{$item->b_masters->tel}}</td>
                   <td>{{$item->created_at}}</td>
                   <td>
-                    <a href="/db_sample/o_detail/{{$item->id}}" class="btn btn-success btn-sm">明細</a>
+                    <a href="/db_sample/o2_detail/{{$item->id}}" class="btn btn-success btn-sm">明細</a>
                   </td>
                   <td>
                     <a href="/db_sample/o_print/{{$item->id}}" target="_blank" rel="noopener noreferrer" class="btn btn-warning text-white btn-sm">帳票</a>

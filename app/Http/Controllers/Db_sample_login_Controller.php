@@ -2,16 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\A_master;
-use App\Models\B_master;
-use App\Models\User;
-use App\Models\O1_transaction;
-use App\Models\O2_transaction;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Barryvdh\DomPDF\Facade\PDF;
 
 class Db_sample_login_Controller extends Controller
 {
@@ -41,7 +34,7 @@ class Db_sample_login_Controller extends Controller
         if (auth()->user()->role == 1 || auth()->user()->role == 5)
           return redirect('db_sample/home_admin');
         else
-          return redirect('db_sample/o_new_list');
+          return redirect('db_sample/o_b_list');
       } else return redirect()->back();
     } else return redirect('db_sample/login');
   }

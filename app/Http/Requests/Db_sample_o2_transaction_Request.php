@@ -13,13 +13,13 @@ class Db_sample_o2_transaction_Request extends FormRequest
 
   public function rules()
   {
-    return ['quantity' => 'required|numeric|integer'];
+    return ['moreFields.*.quantity' => 'required|numeric|integer'];
   }
 
   public function messages()
   {
-    return ["required" => "必須項目です。",
-            "numeric" => "数値項目です。",
-            "integer" => "整数項目です。"];
+    return ["required" => "数量が入力されていない商品があります。",
+            "numeric" => "数量は数値項目です。",
+            "integer" => "数量は整数数量は項目です。"];
   }
 }

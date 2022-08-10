@@ -11,14 +11,14 @@ class Db_sample_user_Controller extends Controller
 
   public function __construct(User_ServiceInterface $user_service)
   {
-      $this->user_service = $user_service;
+    $this->user_service = $user_service;
   }
 
   //ユーザリスト
   public function user_list(Request $request)
   {
-      $items = $this->user_service->list($request->input('keyword'))->paginate(10);
-      return view('db_sample.user_list', ['items' => $items, 'keyword' => $request->input('keyword')]);
+    $items = $this->user_service->list($request->input('keyword'))->paginate(10);
+    return view('db_sample.user_list', ['items' => $items, 'keyword' => $request->input('keyword')]);
   }
 
   //ユーザ新規入力
@@ -68,5 +68,4 @@ class Db_sample_user_Controller extends Controller
     $this->user_service->delete($id);
     return redirect('db_sample/user_list')->with('flashmessage', '削除が完了いたしました。');
   }
-
 }

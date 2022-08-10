@@ -74,22 +74,22 @@ Route::group(['prefix' => 'db_sample'], function () {
       Route::post('b_delete/{id?}/', 'b_delete'); //B_master削除
     });
     Route::controller(Db_sample_transaction_Controller::class)->group(function(){
-      Route::get('o_new_list', 'o_new_list'); //o1_transaction入力用B_masterリスト
-      Route::get('o_new/{id?}', 'o_new'); //o2_transaction新規入力
-      Route::patch('o_new/{id?}', 'o_new_confirm'); //o2_transaction新規確認
-      Route::post('o_new/{id?}', 'o_new_finish'); //o2_transaction新規完了
-      Route::get('o_list', 'o_list'); //o1_transactionリスト
-      Route::get('o_detail/{id?}/', 'o_detail'); //o2_transaction詳細
-      Route::get('o_edit/{id1?}/{id2?}', 'o_edit'); //o2_transaction編集
-      Route::patch('o_edit/{id1?}/{id2?}', 'o_edit_confirm'); //o2_transaction編集確認
-      Route::post('o_edit/{id1?}/{id2?}', 'o_edit_finish'); //o2_transaction編集完了
-      Route::post('o1_delete/{id?}/', 'o1_delete'); //o1_ransaction削除
-      Route::post('o2_delete/{id?}/', 'o2_delete'); //o2_transaction削除
-      Route::get('o_new2/{id?}', 'o_new2'); //o2_transaction新規追加入力
-      Route::patch('o_new2/{id?}', 'o_new2_confirm'); //o2_transaction新規追加確認
-      Route::post('o_new2/{id?}', 'o_new2_finish'); //o2_transaction新規追加完了
-      Route::get('o_print/{id?}/', 'o_print'); //o1_o2_transaction帳票
-      Route::get('o_pdf/{id?}/', 'o_pdf'); //o1_o2_transaction帳票(PDF)
+      Route::get('o_b_list', 'o_b_list'); //o1_transaction入力用B_masterリスト
+      Route::get('o_new/{id1?}', 'o_new'); //o2_transaction新規入力
+      Route::patch('o_new/{id1?}', 'o_new_confirm'); //o2_transaction新規確認
+      Route::post('o_new/{id1?}', 'o_new_finish'); //o2_transaction新規完了
+      Route::get('o1_list', 'o1_list'); //o1_transactionリスト
+      Route::get('o2_detail/{id1?}/', 'o2_detail'); //o2_transaction詳細
+      Route::get('o2_edit/{id1?}/{id2?}', 'o2_edit'); //o2_transaction編集
+      Route::patch('o2_edit/{id1?}/{id2?}', 'o2_edit_confirm'); //o2_transaction編集確認
+      Route::post('o2_edit/{id1?}/{id2?}', 'o2_edit_finish'); //o2_transaction編集完了
+      Route::post('o1_delete/{id1?}/', 'o1_delete'); //o1_ransaction削除
+      Route::post('o2_delete/{id2?}/', 'o2_delete'); //o2_transaction削除
+      Route::get('o2_new/{id1?}', 'o2_new'); //o2_transaction新規追加入力
+      Route::patch('o2_new/{id1?}', 'o2_new_confirm'); //o2_transaction新規追加確認
+      Route::post('o2_new/{id1?}', 'o2_new_finish'); //o2_transaction新規追加完了
+      Route::get('o_print/{id1?}/', 'o_print'); //o1_o2_transaction帳票
+      Route::get('o_pdf/{id1?}/', 'o_pdf'); //o1_o2_transaction帳票(PDF)
     });
   });
 });

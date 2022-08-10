@@ -54,7 +54,7 @@
               </a>
             </div>
             <div class="col-sm-2">
-              <a href="/db_sample/o_list"><button type="submit" class="btn btn-primary">戻る</button></a>
+              <a href="/db_sample/o1_list"><button type="submit" class="btn btn-primary">戻る</button></a>
             </div>
           </div>
           <div class="table-responsive">
@@ -74,7 +74,7 @@
                   <td>{{$item2->a_masters->name}}</td>
                   <td>{{$item2->quantity}}</td>
                   <td>
-                    <a href="/db_sample/o_edit/{{$item1->id}}/{{$item2->id}}" class="btn btn-primary btn-sm">編集</a>
+                    <a href="/db_sample/o2_edit/{{$item1->id}}/{{$item2->id}}" class="btn btn-primary btn-sm">編集</a>
                   </td>
                   <td>
                     <form action="/db_sample/o2_delete/{{$item2->id}}" method="POST">

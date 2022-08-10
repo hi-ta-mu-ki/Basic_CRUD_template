@@ -11,7 +11,7 @@ class Db_sample_a_master_Controller extends Controller
 
   public function __construct(A_master_ServiceInterface $a_master_service)
   {
-      $this->a_master_service = $a_master_service;
+    $this->a_master_service = $a_master_service;
   }
 
   //A_masterリスト
@@ -75,5 +75,4 @@ class Db_sample_a_master_Controller extends Controller
     $this->a_master_service->delete($id);
     return redirect('db_sample/a_list')->with('flashmessage', '削除が完了いたしました。');
   }
-
 }

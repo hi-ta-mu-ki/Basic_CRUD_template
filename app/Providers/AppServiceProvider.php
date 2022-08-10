@@ -38,6 +38,18 @@ class AppServiceProvider extends ServiceProvider
         \App\Services\B_master_ServiceInterface::class,
         \App\Services\B_master_Service::class,
       );
+      $this->app->bind(
+        \App\Repositories\O1_transaction_RepositoryInterface::class,
+        \App\Repositories\O1_transaction_Repository::class,
+      );
+      $this->app->bind(
+        \App\Repositories\O2_transaction_RepositoryInterface::class,
+        \App\Repositories\O2_transaction_Repository::class,
+      );
+      $this->app->bind(
+        \App\Services\Transaction_ServiceInterface::class,
+        \App\Services\Transaction_Service::class,
+      );
     }
 
     /**

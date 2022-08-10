@@ -11,7 +11,7 @@ class Db_sample_b_master_Controller extends Controller
 
   public function __construct(B_master_ServiceInterface $b_master_service)
   {
-      $this->b_master_service = $b_master_service;
+    $this->b_master_service = $b_master_service;
   }
 
   //B_masterリスト
