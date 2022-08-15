@@ -22,9 +22,9 @@ class B_master_Service implements B_master_ServiceInterface
         return $this->b_master_repository->search($keyword);
     }
 
-    public function create($item)
+    public function create($request)
     {
-      return $this->b_master_repository->create($item);
+      return $this->b_master_repository->create($request->all());
     }
 
     public function latest()
@@ -37,9 +37,9 @@ class B_master_Service implements B_master_ServiceInterface
       return $this->b_master_repository->show($id);
     }
 
-    public function update($id, $item)
+    public function update($id, $request)
     {
-      return $this->b_master_repository->update($id, $item);
+      return $this->b_master_repository->update($id, $request->all());
     }
 
     public function delete($id)

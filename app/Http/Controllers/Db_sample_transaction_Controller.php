@@ -29,7 +29,7 @@ class Db_sample_transaction_Controller extends Controller
   {
     $this->transaction_service->o_new($id1);
     $items = $this->transaction_service->o_a_list();
-    return view('db_sample.o_new', ['a_items' => $items]);
+    return view('db_sample.o_new', ['a_items' => $items, 'id1' => $id1]);
   }
 
   //o2_transaction新規確認
@@ -80,8 +80,7 @@ class Db_sample_transaction_Controller extends Controller
   //o2_transaction編集完了
   public function o2_edit_finish(Request $request, $id1, $id2)
   {
-    $item = $request->only(['a_masters_id', 'quantity']);
-    $this->transaction_service->o2_edit_finish($id2, $item);
+    $this->transaction_service->o2_edit_finish($id2, $request);
     return redirect('db_sample/o2_detail/' . $id1)->with('flashmessage', '更新が完了いたしました。');
   }
 
@@ -104,11 +103,11 @@ class Db_sample_transaction_Controller extends Controller
   {
     $item1 = $this->transaction_service->o1_show($id1);
     $a_items = $this->transaction_service->o_a_list();
-    return view('db_sample.o2_new', ['item1' => $item1, 'a_items' => $a_items]);
+    return view('db_sample.o2_new', ['id1' => $id1, 'item1' => $item1, 'a_items' => $a_items]);
   }
 
   //o2_transaction新規追加確認
-  public function o2_new_confirm(\App\Http\Requests\Db_sample_o2_transaction_Request $request)
+  public function o2_new_confirm(\App\Http\Requests\Db_sample_o2_transaction_add_Request $request)
   {
     $name = $this->transaction_service->o2_edit_confirm($request->input('a_masters_id'));
     return view('db_sample.o2_new_confirm', $request->all(), ['name' => $name]);
@@ -117,8 +116,7 @@ class Db_sample_transaction_Controller extends Controller
   //o2_transaction新規追加完了
   public function o2_new_finish(Request $request, $id1)
   {
-    $item = $request->only(['a_masters_id', 'quantity']);
-    $this->transaction_service->o2_new_finish($item, $id1);
+    $this->transaction_service->o2_new_finish($request);
     return redirect('db_sample/o2_detail/' . $id1)->with('flashmessage', '登録が完了いたしました。');
   }
 
@@ -127,14 +125,10 @@ class Db_sample_transaction_Controller extends Controller
   {
     $item1 = $this->transaction_service->o1_show($id1);
     $items2 = $this->transaction_service->o2_amount($id1);
-    $d_amount = $items2['d_amount'];
-    $t_amount = $items2['t_amount'];
-    $items = $items2['items'];
     return view(
-      'db_sample/o_print',
-      [
-        'item1' => $item1, 'items2' => $items,
-        'd_amount' => $d_amount, 't_amount' => $t_amount
+      'db_sample/o_print', [
+        'item1' => $item1, 'items2' => $items2['items'],
+        'd_amount' => $items2['d_amount'], 't_amount' => $items2['t_amount']
       ]
     );
   }
@@ -144,12 +138,9 @@ class Db_sample_transaction_Controller extends Controller
   {
     $item1 = $this->transaction_service->o1_show($id1);
     $items2 = $this->transaction_service->o2_amount($id1);
-    $d_amount = $items2['d_amount'];
-    $t_amount = $items2['t_amount'];
-    $items = $items2['items'];
     $pdf = PDF::loadView('db_sample/o_pdf', [
-      'item1' => $item1, 'items2' => $items,
-      'd_amount' => $d_amount, 't_amount' => $t_amount,
+      'item1' => $item1, 'items2' => $items2['items'],
+      'd_amount' => $items2['d_amount'], 't_amount' => $items2['t_amount'],
     ])->setPaper('A4');
     // return $pdf->download('Db_sample_print.pdf');
     return $pdf->stream('Db_sample_print.pdf');

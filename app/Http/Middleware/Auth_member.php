@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Auth;
 
+use App\Models\User;
+
 class Auth_member
 {
     private $auth;
@@ -24,7 +26,7 @@ class Auth_member
         }
 
         //ユーザーの権限チェック
-        if (auth()->user()->role == 10) {
+        if (auth()->user()->role == User::MEMBER) {
             $this->auth = true;
         } else {
             $this->auth = false;

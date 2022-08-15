@@ -21,7 +21,7 @@
             </div>     
             <div class="row mb-3">
               <label for="login-password" class="col-form-label col-sm-4 text-sm-end">パスワード</label>
-              <input type="password" class="col-sm-6" class="form-control" id="login-password" name="password" value="{{old('password')}}" placeholder="パスワード">
+              <input type="password" class="col-sm-6" class="form-control" id="login-password" name="password" value="{{old('password')}}" autocomplete="off" placeholder="パスワード">
             </div>
             @if(count($errors) >0)
             <div class="alert alert-danger">

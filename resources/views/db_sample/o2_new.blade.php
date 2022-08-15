@@ -22,6 +22,7 @@
           <form action="" method="post" class="form-horizontal" novalidate>
             @csrf
             {{ method_field('patch') }}
+            <input type="hidden" name="o1_transactions_id" value="{{$id1}}">
             <div class="form-group row">
               <label for="name" class="col-sm-2 col-form-label mb-3">品名</label>
               <div class="col-sm-10">

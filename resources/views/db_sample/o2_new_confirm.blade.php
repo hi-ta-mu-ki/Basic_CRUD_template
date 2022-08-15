@@ -13,6 +13,7 @@
         <div class="container mt-3">
           <form action="" method="post" class="form-horizontal">
             @csrf
+            <input type="hidden" name="o1_transactions_id" value="{{$o1_transactions_id}}">
             <input type="hidden" name="a_masters_id" value="{{$a_masters_id}}">
             <input type="hidden" name="quantity" value="{{$quantity}}">
             <div class="form-group row">

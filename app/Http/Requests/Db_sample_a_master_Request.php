@@ -14,13 +14,14 @@ class Db_sample_a_master_Request extends FormRequest
   public function rules()
   {
     return ['name' => 'required',
-            'price' => 'required|numeric|integer'];
+            'price' => 'required|numeric|integer|min:1'];
   }
 
   public function messages()
   {
     return ["required" => "必須項目です。",
             "numeric" => "数値項目です。",
-            "integer" => "整数項目です。"];
+            "integer" => "整数項目です。",
+            "min" => "1以上です。"];
   }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Db_sample_o2_transaction_Request extends FormRequest
+class Db_sample_o2_transaction_add_Request extends FormRequest
 {
   public function authorize()
   {
@@ -13,7 +13,7 @@ class Db_sample_o2_transaction_Request extends FormRequest
 
   public function rules()
   {
-    return ['moreFields.*.quantity' => 'required|numeric|integer|min:1'];
+    return ['quantity' => 'required|numeric|integer|min:1'];
   }
 
   public function messages()

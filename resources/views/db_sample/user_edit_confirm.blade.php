@@ -32,7 +32,7 @@
             <div class="form-group row">
               <label class="col-sm-2 control-label mb-3">役割</label>
               <div class="col-sm-10">
-                @if($role < 6) 管理者 @else 利用者 @endif
+                @if($role <= App\Models\User::CHIEF) 管理者 @else 利用者 @endif
               </div>
             </div>
             <div class="form-group row">

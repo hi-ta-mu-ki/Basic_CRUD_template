@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\User_RepositoryInterface;
-use Illuminate\Support\Facades\Hash;
+use App\Library\DataFormat;
 
 class User_Service implements User_ServiceInterface
 {
@@ -28,19 +28,15 @@ class User_Service implements User_ServiceInterface
       return $this->user_repository->show($id);
     }
 
-    public function create($item)
+    public function create($request)
     {
-      $item['password'] = Hash::make($item['password_raw']);
-      if ($item['role'] < 6)
-        $item['password_raw'] = "";
+      $item = DataFormat::user_format($request);
       return $this->user_repository->create($item);
     }
 
-    public function update($id, $item)
+    public function update($id, $request)
     {
-      $item['password'] = Hash::make($item['password_raw']);
-      if ($item['role'] < 6)
-        $item['password_raw'] = "";
+      $item = DataFormat::user_format($request);
       return $this->user_repository->update($id, $item);
     }
 

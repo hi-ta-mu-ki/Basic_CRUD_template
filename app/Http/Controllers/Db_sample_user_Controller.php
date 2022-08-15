@@ -36,8 +36,7 @@ class Db_sample_user_Controller extends Controller
   //ユーザ新規完了
   public function user_new_finish(Request $request)
   {
-    $item = $request->only(['email', 'name', 'password_raw', 'role']);
-    $this->user_service->create($item);
+    $this->user_service->create($request);
     return redirect('db_sample/user_list')->with('flashmessage', '登録が完了いたしました。');
   }
 
@@ -57,8 +56,7 @@ class Db_sample_user_Controller extends Controller
   //ユーザ編集完了
   public function user_edit_finish(Request $request, $id)
   {
-    $item = $request->only(['email', 'name', 'password_raw', 'role']);
-    $this->user_service->update($id, $item);
+    $this->user_service->update($id, $request);
     return redirect('db_sample/user_list')->with('flashmessage', '更新が完了いたしました。');
   }
 

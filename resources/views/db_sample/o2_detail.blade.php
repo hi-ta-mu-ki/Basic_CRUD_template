@@ -49,7 +49,7 @@
           </div>
           <div class="row mb-3">
             <div class="col-sm-3">
-              <a href="/db_sample/o_new2/{{$item1->id}}" class="btn btn-warning text-white">
+              <a href="/db_sample/o2_new/{{$item1->id}}" class="btn btn-warning text-white">
                 transaction追加
               </a>
             </div>

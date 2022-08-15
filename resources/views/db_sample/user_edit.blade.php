@@ -44,11 +44,11 @@
             <div class="form-group mb-3">
               役割　：　
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="role" id="inline_radio_1" value="1" @if($item->role < 6) checked @endif>
+                <input class="form-check-input" type="radio" name="role" id="inline_radio_1" value="{{ App\Models\User::ADMIN }}" @if($item->role <= App\Models\User::CHIEF) checked @endif>
                   <label class="form-check-label" for="inline_radio_1">管理者</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="role" id="inline_radiox_2" value="10" @if($item->role == 10) checked @endif>
+                <input class="form-check-input" type="radio" name="role" id="inline_radiox_2" value="{{ App\Models\User::MEMBER }}" @if($item->role == App\Models\User::MEMBER) checked @endif>
                 <label class="form-check-label" for="inline_radio_2">利用者</label>
               </div>
             </div>

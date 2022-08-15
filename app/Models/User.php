@@ -41,4 +41,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * ユーザーロール(role)
+     */
+    const ADMIN = 1;    //管理者
+    const CHIEF = 5;    //主任
+    const MEMBER = 10;  //販売員
 }

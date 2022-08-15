@@ -22,9 +22,9 @@ class A_master_Service implements A_master_ServiceInterface
         return $this->a_master_repository->search($keyword);
     }
 
-    public function create($item)
+    public function create($request)
     {
-      return $this->a_master_repository->create($item);
+      return $this->a_master_repository->create($request->all());
     }
 
     public function show($id)
@@ -32,9 +32,9 @@ class A_master_Service implements A_master_ServiceInterface
       return $this->a_master_repository->show($id);
     }
 
-    public function update($id, $item)
+    public function update($id, $request)
     {
-      return $this->a_master_repository->update($id, $item);
+      return $this->a_master_repository->update($id, $request->all());
     }
 
     public function delete($id)

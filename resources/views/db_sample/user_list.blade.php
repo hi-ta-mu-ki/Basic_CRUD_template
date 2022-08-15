@@ -80,9 +80,9 @@
                   <td>{{$item->email}}</td>
                   <td>{{$item->name}}</td>
                   <td>
-                    @if($item->role < 6) ******** @else {{$item->password_raw}} @endif </td>
+                    @if($item->role <= App\Models\User::CHIEF) ******** @else {{$item->password_raw}} @endif </td>
                   <td>
-                    @if($item->role < 6) 管理者 @else 利用者 @endif </td>
+                    @if($item->role <= App\Models\User::CHIEF) 管理者 @else 利用者 @endif </td>
                   <td>
                     <a href="/db_sample/user_edit/{{$item->id}}" class="btn btn-primary btn-sm">編集</a>
                   </td>

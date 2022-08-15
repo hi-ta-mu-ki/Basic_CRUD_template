@@ -6,6 +6,8 @@ use App\Repositories\A_master_RepositoryInterface;
 use App\Services\B_master_ServiceInterface;
 use App\Repositories\O1_transaction_RepositoryInterface;
 use App\Repositories\O2_transaction_RepositoryInterface;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class Transaction_Service implements Transaction_ServiceInterface
@@ -60,26 +62,33 @@ class Transaction_Service implements Transaction_ServiceInterface
 
   public function o_new_finish()
   {
-    $item = array();
-    $item['b_masters_id'] = Session::get('b_id');
-    $this->o1_transaction_repository->create($item);
-    $o1_item = $this->o1_transaction_repository->show_latest();
-    unset($item);
-    foreach (Session::get('tmpFields') as $value) {
-      $item['o1_transactions_id'] = $o1_item->id;
-      $item['a_masters_id'] = $value['a_masters_id'];
-      $item['quantity'] = $value['quantity'];
-      $this->o2_transaction_repository->create($item);
+    try {
+      DB::beginTransaction();
+      $item = array();
+      $item['b_masters_id'] = Session::get('b_id');
+      $this->o1_transaction_repository->create($item);
+      $o1_item = $this->o1_transaction_repository->show_latest();
+      unset($item);
+      foreach (Session::get('tmpFields') as $value) {
+        $item['o1_transactions_id'] = $o1_item->id;
+        $item['a_masters_id'] = $value['a_masters_id'];
+        $item['quantity'] = $value['quantity'];
+        $this->o2_transaction_repository->create($item);
+      }
+      Session::forget('b_id');
+      Session::forget('b_name');
+      Session::forget('tmpFields');
+      DB::commit();
+    } catch (\Exception $e) {
+        DB::rollBack();
+        Log::error($e);
     }
-    Session::forget('b_id');
-    Session::forget('b_name');
-    Session::forget('tmpFields');
-  }
+}
 
   public function o1_list($keyword)
   {
     if (empty($keyword))
-      return $this->o1_transaction_repository->all()->get();
+      return $this->o1_transaction_repository->all();
     else
       return $this->o1_transaction_repository->search($keyword);
   }
@@ -104,9 +113,9 @@ class Transaction_Service implements Transaction_ServiceInterface
       return $this->a_master_repository->show($id);
   }
 
-  public function o2_edit_finish($id, $item)
+  public function o2_edit_finish($id, $request)
   {
-    return $this->o2_transaction_repository->update($id, $item);
+    return $this->o2_transaction_repository->update($id, $request->all());
   }
 
   public function o1_delete($id)
@@ -119,10 +128,9 @@ class Transaction_Service implements Transaction_ServiceInterface
     return $this->o2_transaction_repository->delete($id);
   }
 
-  public function o2_new_finish($item, $id)
+  public function o2_new_finish($request)
   {
-    $item['o1_transactions_id'] = $id;
-    $this->o2_transaction_repository->create($item);
+    $this->o2_transaction_repository->create($request->all());
   }
 
   public function o2_amount($id)

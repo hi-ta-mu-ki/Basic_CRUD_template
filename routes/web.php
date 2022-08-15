@@ -23,6 +23,10 @@ use App\Http\Controllers\Db_sample_login_Controller;
 //     return view('welcome');
 // });
 
+Route::get('/', function () {
+    return redirect('db_sample/login');
+});
+
 //Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

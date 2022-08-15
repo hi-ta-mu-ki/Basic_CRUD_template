@@ -36,9 +36,8 @@ class Db_sample_b_master_Controller extends Controller
   //B_master新規完了
   public function b_new_finish(Request $request)
   {
-    $item = $request->only(['name', 'tel']);
-    $this->b_master_service->create($item);
-    $b_masters = $this->b_master_service->latest($item);
+    $this->b_master_service->create($request);
+    $b_masters = $this->b_master_service->latest();
     return redirect('/db_sample/o_new/' . $b_masters->id)->with('flashmessage', '登録が完了いたしました。');
   }
 
@@ -58,8 +57,7 @@ class Db_sample_b_master_Controller extends Controller
   //B_master編集完了
   public function b_edit_finish(Request $request, $id)
   {
-    $item = $request->only(['name', 'tel']);
-    $this->b_master_service->update($id, $item);
+    $this->b_master_service->update($id, $request);
     return redirect('db_sample/b_list')->with('flashmessage', '更新が完了いたしました。');
   }
 

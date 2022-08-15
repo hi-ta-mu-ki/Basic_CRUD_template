@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -31,12 +33,12 @@ class Db_sample_login_Controller extends Controller
         'password' => 'required|min:8'
       ]);
       if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
-        if (auth()->user()->role == 1 || auth()->user()->role == 5)
+        if (auth()->user()->role == User::ADMIN || auth()->user()->role == User::CHIEF)
           return redirect('db_sample/home_admin');
         else
           return redirect('db_sample/o_b_list');
       } else return redirect()->back();
-    } else return redirect('db_sample/login');
+    }
   }
 
   //ログアウト

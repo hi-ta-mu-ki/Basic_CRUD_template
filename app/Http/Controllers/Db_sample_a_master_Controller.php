@@ -36,8 +36,7 @@ class Db_sample_a_master_Controller extends Controller
   //A_master新規完了
   public function a_new_finish(Request $request)
   {
-    $item = $request->only(['name', 'price']);
-    $this->a_master_service->create($item);
+    $this->a_master_service->create($request);
     return redirect('db_sample/a_list')->with('flashmessage', '登録が完了いたしました。');
   }
 
@@ -57,8 +56,7 @@ class Db_sample_a_master_Controller extends Controller
   //A_master編集完了
   public function a_edit_finish(Request $request, $id)
   {
-    $item = $request->only(['name', 'price']);
-    $this->a_master_service->update($id, $item);
+    $this->a_master_service->update($id, $request);
     return redirect('db_sample/a_list')->with('flashmessage', '更新が完了いたしました。');
   }
 

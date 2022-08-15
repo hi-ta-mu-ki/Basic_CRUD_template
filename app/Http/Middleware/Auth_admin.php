@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Auth;
 
+use App\Models\User;
+
 class Auth_admin
 {
     private $auth;
@@ -24,8 +26,8 @@ class Auth_admin
         }
 
         //ユーザーの権限チェック
-        if (auth()->user()->role == 1 || auth()->user()->role == 5) {
-            $this->auth = true;
+        if (auth()->user()->role == User::ADMIN || auth()->user()->role == User::CHIEF) {
+          $this->auth = true;
         } else {
             $this->auth = false;
         }
